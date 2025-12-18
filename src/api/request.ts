@@ -6,6 +6,7 @@ import { BASE_URL } from '@/api/urls';
 interface RequestConfig extends RequestInit {
 	params?: Record<string, string | number | boolean>;
 	timeout?: number;
+	skipInterceptors?: boolean;
 }
 
 /**
@@ -128,13 +129,22 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 /**
- * 封装的 request 方法
+ * 统一请求配置
  */
-async function request<T = unknown>(
+interface UnifiedRequestConfig extends Omit<RequestConfig, 'method' | 'body'> {
+	method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+	params?: Record<string, string | number | boolean>;
+	data?: unknown;
+}
+
+/**
+ * 统一的 request 函数
+ */
+export async function request<T = unknown>(
 	url: string,
-	config: RequestConfig = {}
+	config: UnifiedRequestConfig = {}
 ): Promise<T> {
-	const { params, headers = {}, ...restConfig } = config;
+	const { method = 'GET', params, data, headers = {}, ...restConfig } = config;
 
 	// 构建 URL
 	let fullUrl = buildUrl(url, params);
@@ -142,14 +152,22 @@ async function request<T = unknown>(
 	// 默认请求头
 	let finalConfig: RequestConfig = {
 		...restConfig,
+		method,
 		headers: {
 			'Content-Type': 'application/json',
 			...headers,
 		},
 	};
 
-	for (const interceptor of requestInterceptors) {
-		[fullUrl, finalConfig] = interceptor(fullUrl, finalConfig);
+	// 对于有数据的请求，添加 body
+	if (data && ['POST', 'PUT', 'PATCH'].includes(method)) {
+		finalConfig.body = JSON.stringify(data);
+	}
+
+	if (!finalConfig.skipInterceptors) {
+		for (const interceptor of requestInterceptors) {
+			[fullUrl, finalConfig] = interceptor(fullUrl, finalConfig);
+		}
 	}
 
 	try {
@@ -171,14 +189,9 @@ async function request<T = unknown>(
  */
 export function get<T = unknown>(
 	url: string,
-	params?: Record<string, string | number | boolean>,
-	config?: Omit<RequestConfig, 'params' | 'method' | 'body'>
+	config: Omit<UnifiedRequestConfig, 'method' | 'data'> = {}
 ): Promise<T> {
-	return request<T>(url, {
-		...config,
-		method: 'GET',
-		params,
-	});
+	return request<T>(url, { ...config, method: 'GET' });
 }
 
 /**
@@ -186,14 +199,9 @@ export function get<T = unknown>(
  */
 export function post<T = unknown>(
 	url: string,
-	data?: unknown,
-	config?: Omit<RequestConfig, 'method' | 'body'>
+	config: Omit<UnifiedRequestConfig, 'method'> = {}
 ): Promise<T> {
-	return request<T>(url, {
-		...config,
-		method: 'POST',
-		body: JSON.stringify(data),
-	});
+	return request<T>(url, { ...config, method: 'POST' });
 }
 
 /**
@@ -201,14 +209,9 @@ export function post<T = unknown>(
  */
 export function put<T = unknown>(
 	url: string,
-	data?: unknown,
-	config?: Omit<RequestConfig, 'method' | 'body'>
+	config: Omit<UnifiedRequestConfig, 'method'> = {}
 ): Promise<T> {
-	return request<T>(url, {
-		...config,
-		method: 'PUT',
-		body: JSON.stringify(data),
-	});
+	return request<T>(url, { ...config, method: 'PUT' });
 }
 
 /**
@@ -216,14 +219,9 @@ export function put<T = unknown>(
  */
 export function del<T = unknown>(
 	url: string,
-	params?: Record<string, string | number | boolean>,
-	config?: Omit<RequestConfig, 'params' | 'method' | 'body'>
+	config: Omit<UnifiedRequestConfig, 'method' | 'data'> = {}
 ): Promise<T> {
-	return request<T>(url, {
-		...config,
-		method: 'DELETE',
-		params,
-	});
+	return request<T>(url, { ...config, method: 'DELETE' });
 }
 
 /**
@@ -231,14 +229,9 @@ export function del<T = unknown>(
  */
 export function patch<T = unknown>(
 	url: string,
-	data?: unknown,
-	config?: Omit<RequestConfig, 'method' | 'body'>
+	config: Omit<UnifiedRequestConfig, 'method'> = {}
 ): Promise<T> {
-	return request<T>(url, {
-		...config,
-		method: 'PATCH',
-		body: JSON.stringify(data),
-	});
+	return request<T>(url, { ...config, method: 'PATCH' });
 }
 
 export { RequestError };

@@ -1,6 +1,17 @@
 import { get } from '@/api/request';
 import { urls } from '@/api/urls';
 
-export async function fetchHelloWorldTemplate() {
-	return get<string>(urls.helloWorld.template);
+interface HelloResponse {
+	message: string;
+	temp: boolean;
+}
+
+export async function fetchHelloWorldTemplate(helloMsg: string, temp: boolean) {
+	return get<HelloResponse>(urls.helloWorld.template, {
+		params: {
+			message: helloMsg,
+			temp: temp,
+		},
+		skipInterceptors: true,
+	});
 }

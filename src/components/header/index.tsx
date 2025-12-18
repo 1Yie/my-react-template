@@ -4,8 +4,8 @@ import { Github, Menu, Search } from 'lucide-react';
 
 export function Header() {
 	function testApi() {
-		fetchHelloWorldTemplate().then((res) => {
-			console.log('API Response:', res);
+		fetchHelloWorldTemplate('HelloWorld', true).then((res) => {
+			console.log('API Response:', res.message, res.temp);
 		});
 	}
 
