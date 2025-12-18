@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from 'react';
 import * as RechartsPrimitive from 'recharts';
 
@@ -38,12 +37,20 @@ function ChartContainer({
 	className,
 	children,
 	config,
+	width,
+	height,
+	data,
+	emptyComponent,
 	...props
 }: React.ComponentProps<'div'> & {
 	config: ChartConfig;
 	children: React.ComponentProps<
 		typeof RechartsPrimitive.ResponsiveContainer
 	>['children'];
+	width?: number | string;
+	height?: number | string;
+	data?: unknown[];
+	emptyComponent?: React.ReactNode;
 }) {
 	const uniqueId = React.useId();
 	const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
@@ -54,15 +61,28 @@ function ChartContainer({
 				data-slot="chart"
 				data-chart={chartId}
 				className={cn(
-					"[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+					"[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
 					className
 				)}
+				style={{
+					width: width || '100%',
+					height: height || 'auto',
+					...props.style,
+				}}
 				{...props}
 			>
 				<ChartStyle id={chartId} config={config} />
-				<RechartsPrimitive.ResponsiveContainer>
-					{children}
-				</RechartsPrimitive.ResponsiveContainer>
+				{data && data.length === 0 ? (
+					emptyComponent || (
+						<div className="flex h-full items-center justify-center">
+							暂无数据
+						</div>
+					)
+				) : (
+					<RechartsPrimitive.ResponsiveContainer>
+						{children}
+					</RechartsPrimitive.ResponsiveContainer>
+				)}
 			</div>
 		</ChartContext.Provider>
 	);
@@ -234,7 +254,7 @@ function ChartTooltipContent({
 												</span>
 											</div>
 											{item.value && (
-												<span className="text-foreground font-mono font-medium tabular-nums">
+												<span className="text-foreground ml-4 font-mono font-medium tabular-nums">
 													{item.value.toLocaleString()}
 												</span>
 											)}

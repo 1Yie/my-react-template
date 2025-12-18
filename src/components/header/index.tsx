@@ -38,7 +38,11 @@ export function Header() {
 					</Button>
 
 					<Button variant="ghost" size="icon">
-						<a href="https://github.com" target="_blank" rel="noreferrer">
+						<a
+							href="https://github.com/1Yie/my-react-template"
+							target="_blank"
+							rel="noreferrer"
+						>
 							<Github className="size-5" />
 						</a>
 					</Button>

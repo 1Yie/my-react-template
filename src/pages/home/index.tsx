@@ -7,6 +7,15 @@ import {
 } from '@/components/ui/card';
 
 import {
+	Rocket,
+	FolderTree,
+	Zap,
+	Palette,
+	Package,
+	ArrowRight,
+} from 'lucide-react';
+
+import {
 	BarChartComponent,
 	ScatterChartComponent,
 	PieChartComponent,
@@ -16,6 +25,7 @@ import {
 	LineChartComponent,
 } from '@/components/charts';
 import type { ChartConfig } from '@/components/ui/chart';
+import { Badge } from '@/components/ui/badge';
 
 export function Home() {
 	const data = [
@@ -116,7 +126,89 @@ export function Home() {
 	return (
 		<div className="min-h-screen bg-white p-6 text-slate-900 md:p-12 dark:bg-slate-950 dark:text-slate-100">
 			<div className="mx-auto max-w-4xl space-y-10">
-				{/* 主内容区 */}
+				<header className="space-y-4">
+					<div className="flex items-center gap-2">
+						<Badge
+							variant="outline"
+							className="rounded-full border-slate-200 px-4 py-1 font-medium dark:border-slate-800"
+						>
+							v1.0.0 Stable
+						</Badge>
+					</div>
+					<h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+						Ichiyo <span className="text-slate-400">Template</span>
+					</h1>
+					<p className="max-w-2xl text-lg leading-relaxed text-slate-500 dark:text-slate-400">
+						基于 React Compiler 与 Tailwind v4 构建的高性能现代化开发环境。
+					</p>
+				</header>
+
+				<div className="grid gap-6">
+					<Card className="border-slate-200 bg-slate-50/50 shadow-none dark:border-slate-800 dark:bg-slate-900/50">
+						<CardHeader>
+							<CardTitle className="flex items-center gap-2">
+								<Rocket className="size-5 text-slate-600 dark:text-slate-400" />
+								快速开始
+							</CardTitle>
+							<CardDescription>通过以下步骤配置并运行您的项目</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div className="grid gap-4">
+								{[
+									{
+										label: '目录结构',
+										desc: '核心业务逻辑位于 src/ 目录，支持 @/ 路径别名',
+										icon: <FolderTree className="size-5" />,
+									},
+									{
+										label: '启动项目',
+										desc: '执行 bun run dev 开启 Vite 热更新开发服务器',
+										icon: <Zap className="size-5" />,
+									},
+									{
+										label: '样式定制',
+										desc: 'Tailwind v4 采用原生 CSS 变量配置，更加直观快捷',
+										icon: <Palette className="size-5" />,
+									},
+									{
+										label: '构建部署',
+										desc: '运行 bun run build 生成高度优化的静态资源包',
+										icon: <Package className="size-5" />,
+									},
+								].map((item, i) => (
+									<div
+										key={i}
+										className="group flex cursor-default items-center justify-between rounded-xl border border-transparent p-4 transition-all hover:border-slate-200 hover:bg-white dark:hover:border-slate-800 dark:hover:bg-slate-900"
+									>
+										<div className="flex items-center gap-4">
+											<div className="rounded-lg bg-slate-200/50 p-2 text-slate-600 transition-colors group-hover:bg-slate-900 group-hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:group-hover:bg-slate-100 dark:group-hover:text-slate-900">
+												{item.icon}
+											</div>
+											<div>
+												<p className="font-semibold">{item.label}</p>
+												<p className="text-sm text-slate-500 dark:text-slate-400">
+													{item.desc}
+												</p>
+											</div>
+										</div>
+										<ArrowRight className="size-4 -translate-x-2 text-slate-300 opacity-0 transition-all group-hover:translate-x-0 group-hover:text-slate-900 group-hover:opacity-100 dark:group-hover:text-white" />
+									</div>
+								))}
+							</div>
+						</CardContent>
+					</Card>
+				</div>
+
+				<header className="space-y-4">
+					<h1 className="text-2xl font-bold tracking-tight md:text-3xl">
+						Template <span className="text-slate-400">Charts</span>
+					</h1>
+					<p className="max-w-2xl text-base leading-relaxed text-slate-500 dark:text-slate-400">
+						基于 coss ui + recharts
+						构建的多样化图表组件，满足各种数据可视化需求。
+					</p>
+				</header>
+
 				<div className="grid gap-6">
 					<Card className="border-slate-200 bg-slate-50/50 shadow-none dark:border-slate-800 dark:bg-slate-900/50">
 						<CardHeader>
@@ -130,6 +222,7 @@ export function Home() {
 								xAxisKey="date"
 								xAxisLabel="月份"
 								yAxisLabel="数量"
+								height={400}
 								barKeys={['访问量', '转化量']}
 							/>
 						</CardContent>
@@ -147,6 +240,7 @@ export function Home() {
 								xAxisKey="x"
 								yAxisKey="y"
 								zAxisKey="z"
+								height={400}
 								xAxisLabel="X 值"
 								yAxisLabel="Y 值"
 							/>
@@ -163,6 +257,7 @@ export function Home() {
 								data={pieData}
 								config={pieConfig}
 								dataKey="value"
+								height={400}
 								nameKey="name"
 							/>
 						</CardContent>
@@ -180,6 +275,7 @@ export function Home() {
 								xAxisKey="date"
 								xAxisLabel="月份"
 								yAxisLabel="数量"
+								height={400}
 								areaKeys={['访问量', '转化量']}
 							/>
 						</CardContent>
@@ -196,6 +292,7 @@ export function Home() {
 								config={radarConfig}
 								dataKeys={['A', 'B']}
 								nameKey="subject"
+								height={400}
 							/>
 						</CardContent>
 					</Card>
@@ -210,6 +307,7 @@ export function Home() {
 								data={funnelData}
 								config={funnelConfig}
 								dataKey="value"
+								height={400}
 								nameKey="name"
 								colors={[
 									'var(--chart-1)',
@@ -233,6 +331,7 @@ export function Home() {
 								lineType="linear"
 								xAxisKey="date"
 								xAxisLabel="月份"
+								height={400}
 								yAxisLabel="数量"
 								lineKeys={['访问量', '转化量']}
 							/>
