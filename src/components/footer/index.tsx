@@ -1,11 +1,4 @@
-import {
-	Github,
-	BookOpen,
-	Heart,
-	Code,
-	ExternalLink,
-	Package,
-} from 'lucide-react';
+import { Github, BookOpen, Heart, Code, ExternalLink } from 'lucide-react';
 
 export function Footer() {
 	const currentYear = new Date().getFullYear();

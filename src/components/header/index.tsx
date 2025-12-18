@@ -51,7 +51,7 @@ export function Header() {
 						<Menu className="size-5" />
 					</Button>
 
-					<div className="ml-2 hidden h-5 w-[1px] bg-slate-200 sm:block dark:bg-slate-800" />
+					<div className="ml-2 hidden h-5 w-px bg-slate-200 sm:block dark:bg-slate-800" />
 
 					<Button
 						variant="default"
