@@ -1,7 +1,14 @@
+import { fetchHelloWorldTemplate } from '@/api/hello';
 import { Button } from '@/components/ui/button';
 import { Github, Menu, Search } from 'lucide-react';
 
 export function Header() {
+	function testApi() {
+		fetchHelloWorldTemplate().then((res) => {
+			console.log('API Response:', res);
+		});
+	}
+
 	return (
 		<header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/80 backdrop-blur-md dark:border-slate-800/60 dark:bg-slate-950/80">
 			<div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -57,6 +64,7 @@ export function Header() {
 						variant="default"
 						size="sm"
 						className="ml-2 hidden rounded-full px-4 sm:flex"
+						onClick={testApi}
 					>
 						立即开始
 					</Button>

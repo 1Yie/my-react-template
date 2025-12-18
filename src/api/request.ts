@@ -33,6 +33,23 @@ class RequestError extends Error {
 }
 
 /**
+ * 请求拦截器类型
+ */
+type RequestInterceptor = (
+	url: string,
+	config: RequestConfig
+) => [string, RequestConfig];
+
+const requestInterceptors: RequestInterceptor[] = [];
+
+/**
+ * 添加请求拦截器
+ */
+export function addRequestInterceptor(interceptor: RequestInterceptor) {
+	requestInterceptors.push(interceptor);
+}
+
+/**
  * 默认超时时间（毫秒）
  */
 const DEFAULT_TIMEOUT = 10000;
@@ -120,19 +137,23 @@ async function request<T = unknown>(
 	const { params, headers = {}, ...restConfig } = config;
 
 	// 构建 URL
-	const fullUrl = buildUrl(url, params);
+	let fullUrl = buildUrl(url, params);
 
 	// 默认请求头
-	const defaultHeaders: HeadersInit = {
-		'Content-Type': 'application/json',
-		...headers,
+	let finalConfig: RequestConfig = {
+		...restConfig,
+		headers: {
+			'Content-Type': 'application/json',
+			...headers,
+		},
 	};
 
+	for (const interceptor of requestInterceptors) {
+		[fullUrl, finalConfig] = interceptor(fullUrl, finalConfig);
+	}
+
 	try {
-		const response = await fetchWithTimeout(fullUrl, {
-			...restConfig,
-			headers: defaultHeaders,
-		});
+		const response = await fetchWithTimeout(fullUrl, finalConfig);
 
 		return await handleResponse<T>(response);
 	} catch (error) {

@@ -123,6 +123,7 @@ export function Home() {
 		{ name: '购买', value: 500 },
 		{ name: '复购', value: 200 },
 	];
+
 	return (
 		<div className="min-h-screen bg-white p-6 text-slate-900 md:p-12 dark:bg-slate-950 dark:text-slate-100">
 			<div className="mx-auto max-w-4xl space-y-10">
