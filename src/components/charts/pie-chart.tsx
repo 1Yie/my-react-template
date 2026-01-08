@@ -1,10 +1,12 @@
 import { Pie, PieChart, Cell } from 'recharts';
+
+import type { ChartConfig } from '@/components/ui/chart';
+
 import {
 	ChartContainer,
 	ChartTooltipContent,
 	ChartTooltip,
 } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Empty, EmptyTitle, EmptyMedia } from '@/components/ui/empty';
 
 interface PieChartProps {
@@ -35,22 +37,20 @@ export function PieChartComponent({
 	return (
 		<ChartContainer
 			config={config}
-			width={width}
-			height={height}
 			data={data}
 			emptyComponent={
 				<div className="flex h-full items-center justify-center">
 					<Empty>
 						<EmptyMedia variant="icon">
 							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
 								fill="none"
+								height="24"
 								stroke="currentColor"
-								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="2"
+								viewBox="0 0 24 24"
+								width="24"
 							>
 								<path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
 								<path d="M22 12A10 10 0 0 0 12 2v10z" />
@@ -60,19 +60,21 @@ export function PieChartComponent({
 					</Empty>
 				</div>
 			}
+			height={height}
+			width={width}
 		>
 			<PieChart>
 				<Pie
-					data={data}
-					dataKey={dataKey}
-					nameKey={nameKey}
 					cx="50%"
 					cy="50%"
-					outerRadius={80}
+					data={data}
+					dataKey={dataKey}
 					label
+					nameKey={nameKey}
+					outerRadius={80}
 				>
 					{data.map((_, index) => (
-						<Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+						<Cell fill={colors[index % colors.length]} key={`cell-${index}`} />
 					))}
 				</Pie>
 				<ChartTooltip content={<ChartTooltipContent />} />

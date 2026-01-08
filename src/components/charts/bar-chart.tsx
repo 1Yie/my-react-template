@@ -1,10 +1,12 @@
 import { Bar, BarChart, XAxis, YAxis } from 'recharts';
+
+import type { ChartConfig } from '@/components/ui/chart';
+
 import {
 	ChartContainer,
 	ChartTooltipContent,
 	ChartTooltip,
 } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Empty, EmptyTitle, EmptyMedia } from '@/components/ui/empty';
 
 interface BarChartProps {
@@ -31,24 +33,22 @@ export function BarChartComponent({
 	return (
 		<ChartContainer
 			config={config}
-			width={width}
-			height={height}
 			data={data}
 			emptyComponent={
 				<div className="flex h-full items-center justify-center">
 					<Empty>
 						<EmptyMedia variant="icon">
 							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
 								fill="none"
+								height="24"
 								stroke="currentColor"
-								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="2"
+								viewBox="0 0 24 24"
+								width="24"
 							>
-								<rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+								<rect height="18" rx="2" ry="2" width="18" x="3" y="4" />
 								<line x1="16" x2="16" y1="2" y2="6" />
 								<line x1="8" x2="8" y1="2" y2="6" />
 								<line x1="3" x2="21" y1="10" y2="10" />
@@ -58,6 +58,8 @@ export function BarChartComponent({
 					</Empty>
 				</div>
 			}
+			height={height}
+			width={width}
 		>
 			<BarChart
 				data={data}
@@ -72,7 +74,7 @@ export function BarChartComponent({
 				/>
 				<ChartTooltip content={<ChartTooltipContent />} />
 				{barKeys.map((key) => (
-					<Bar key={key} dataKey={key} fill={`var(--color-${key})`} />
+					<Bar dataKey={key} fill={`var(--color-${key})`} key={key} />
 				))}
 			</BarChart>
 		</ChartContainer>

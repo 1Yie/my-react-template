@@ -1,10 +1,12 @@
 import { Funnel, FunnelChart, LabelList, Cell } from 'recharts';
+
+import type { ChartConfig } from '@/components/ui/chart';
+
 import {
 	ChartContainer,
 	ChartTooltipContent,
 	ChartTooltip,
 } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Empty, EmptyTitle, EmptyMedia } from '@/components/ui/empty';
 
 interface FunnelChartProps {
@@ -34,22 +36,20 @@ export function FunnelChartComponent({
 	return (
 		<ChartContainer
 			config={config}
-			width={width}
-			height={height}
 			data={data}
 			emptyComponent={
 				<div className="flex h-full items-center justify-center">
 					<Empty>
 						<EmptyMedia variant="icon">
 							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
 								fill="none"
+								height="24"
 								stroke="currentColor"
-								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="2"
+								viewBox="0 0 24 24"
+								width="24"
 							>
 								<path d="M4.5 2h15l-1.5 18h-12z" />
 								<path d="M6 6h12" />
@@ -62,14 +62,16 @@ export function FunnelChartComponent({
 					</Empty>
 				</div>
 			}
+			height={height}
+			width={width}
 		>
 			<FunnelChart margin={{ top: 20, right: 30, bottom: 40, left: 20 }}>
 				<ChartTooltip content={<ChartTooltipContent />} />
-				<Funnel dataKey={dataKey} data={data} isAnimationActive>
+				<Funnel data={data} dataKey={dataKey} isAnimationActive>
 					{data.map((_, index) => (
-						<Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+						<Cell fill={colors[index % colors.length]} key={`cell-${index}`} />
 					))}
-					<LabelList position="center" fill="#fff" stroke="none" />
+					<LabelList fill="#fff" position="center" stroke="none" />
 				</Funnel>
 			</FunnelChart>
 		</ChartContainer>

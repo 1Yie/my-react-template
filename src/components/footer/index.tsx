@@ -59,13 +59,13 @@ export function Footer() {
 								},
 							].map((link) => (
 								<a
-									key={link.label}
-									href={link.href}
-									target={link.external ? '_blank' : undefined}
-									rel={link.external ? 'noopener noreferrer' : undefined}
 									className="flex items-center gap-2 text-sm text-slate-500
 										transition-colors hover:text-slate-900 dark:text-slate-400
 										dark:hover:text-slate-100"
+									href={link.href}
+									key={link.label}
+									rel={link.external ? 'noopener noreferrer' : undefined}
+									target={link.external ? '_blank' : undefined}
 								>
 									{link.icon}
 									{link.label}
@@ -91,11 +91,11 @@ export function Footer() {
 							<p>
 								发现问题？欢迎提交{' '}
 								<a
-									href="https://github.com/1Yie/my-react-template/issues"
-									target="_blank"
-									rel="noopener noreferrer"
 									className="text-slate-700 underline hover:text-slate-900
 										dark:text-slate-300 dark:hover:text-slate-100"
+									href="https://github.com/1Yie/my-react-template/issues"
+									rel="noopener noreferrer"
+									target="_blank"
 								>
 									Issue
 								</a>

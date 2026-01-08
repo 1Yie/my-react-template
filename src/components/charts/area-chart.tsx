@@ -1,10 +1,12 @@
 import { Area, AreaChart, XAxis, YAxis } from 'recharts';
+
+import type { ChartConfig } from '@/components/ui/chart';
+
 import {
 	ChartContainer,
 	ChartTooltipContent,
 	ChartTooltip,
 } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Empty, EmptyTitle, EmptyMedia } from '@/components/ui/empty';
 
 interface AreaChartProps {
@@ -31,22 +33,20 @@ export function AreaChartComponent({
 	return (
 		<ChartContainer
 			config={config}
-			width={width}
-			height={height}
 			data={data}
 			emptyComponent={
 				<div className="flex h-full items-center justify-center">
 					<Empty>
 						<EmptyMedia variant="icon">
 							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
 								fill="none"
+								height="24"
 								stroke="currentColor"
-								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="2"
+								viewBox="0 0 24 24"
+								width="24"
 							>
 								<path d="M3 3v18h18" />
 								<path d="M18 17V9" />
@@ -58,6 +58,8 @@ export function AreaChartComponent({
 					</Empty>
 				</div>
 			}
+			height={height}
+			width={width}
 		>
 			<AreaChart
 				data={data}
@@ -73,12 +75,12 @@ export function AreaChartComponent({
 				<ChartTooltip content={<ChartTooltipContent />} />
 				{areaKeys.map((key) => (
 					<Area
-						key={key}
-						type="monotone"
 						dataKey={key}
+						fill={`var(--color-${key})`}
+						key={key}
 						stackId="1"
 						stroke={`var(--color-${key})`}
-						fill={`var(--color-${key})`}
+						type="monotone"
 					/>
 				))}
 			</AreaChart>

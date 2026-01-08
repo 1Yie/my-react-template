@@ -1,12 +1,4 @@
 import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-	CardDescription,
-} from '@/components/ui/card';
-
-import {
 	Rocket,
 	FolderTree,
 	Zap,
@@ -14,6 +6,8 @@ import {
 	Package,
 	ArrowRight,
 } from 'lucide-react';
+
+import type { ChartConfig } from '@/components/ui/chart';
 
 import {
 	BarChartComponent,
@@ -24,8 +18,14 @@ import {
 	FunnelChartComponent,
 	LineChartComponent,
 } from '@/components/charts';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Badge } from '@/components/ui/badge';
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+} from '@/components/ui/card';
 
 export function Home() {
 	const data = [
@@ -133,9 +133,9 @@ export function Home() {
 				<header className="space-y-4">
 					<div className="flex items-center gap-2">
 						<Badge
-							variant="outline"
 							className="rounded-full border-slate-200 px-4 py-1 font-medium
 								dark:border-slate-800"
+							variant="outline"
 						>
 							v1.0.0 Stable
 						</Badge>
@@ -188,11 +188,11 @@ export function Home() {
 									},
 								].map((item, i) => (
 									<div
-										key={i}
 										className="group flex cursor-default items-center
 											justify-between rounded-xl border border-transparent p-4
 											transition-all hover:border-slate-200 hover:bg-white
 											dark:hover:border-slate-800 dark:hover:bg-slate-900"
+										key={i}
 									>
 										<div className="flex items-center gap-4">
 											<div
@@ -250,13 +250,13 @@ export function Home() {
 						</CardHeader>
 						<CardContent>
 							<BarChartComponent
-								data={data}
+								barKeys={['访问量', '转化量']}
 								config={chartConfig}
+								data={data}
+								height={400}
 								xAxisKey="date"
 								xAxisLabel="月份"
 								yAxisLabel="数量"
-								height={400}
-								barKeys={['访问量', '转化量']}
 							/>
 						</CardContent>
 					</Card>
@@ -271,14 +271,14 @@ export function Home() {
 						</CardHeader>
 						<CardContent>
 							<ScatterChartComponent
-								data={scatterData}
 								config={scatterConfig}
-								xAxisKey="x"
-								yAxisKey="y"
-								zAxisKey="z"
+								data={scatterData}
 								height={400}
+								xAxisKey="x"
 								xAxisLabel="X 值"
+								yAxisKey="y"
 								yAxisLabel="Y 值"
+								zAxisKey="z"
 							/>
 						</CardContent>
 					</Card>
@@ -293,8 +293,8 @@ export function Home() {
 						</CardHeader>
 						<CardContent>
 							<PieChartComponent
-								data={pieData}
 								config={pieConfig}
+								data={pieData}
 								dataKey="value"
 								height={400}
 								nameKey="name"
@@ -312,13 +312,13 @@ export function Home() {
 						</CardHeader>
 						<CardContent>
 							<AreaChartComponent
-								data={data}
+								areaKeys={['访问量', '转化量']}
 								config={chartConfig}
+								data={data}
+								height={400}
 								xAxisKey="date"
 								xAxisLabel="月份"
 								yAxisLabel="数量"
-								height={400}
-								areaKeys={['访问量', '转化量']}
 							/>
 						</CardContent>
 					</Card>
@@ -333,11 +333,11 @@ export function Home() {
 						</CardHeader>
 						<CardContent>
 							<RadarChartComponent
-								data={radarData}
 								config={radarConfig}
+								data={radarData}
 								dataKeys={['A', 'B']}
-								nameKey="subject"
 								height={400}
+								nameKey="subject"
 							/>
 						</CardContent>
 					</Card>
@@ -352,17 +352,17 @@ export function Home() {
 						</CardHeader>
 						<CardContent>
 							<FunnelChartComponent
-								data={funnelData}
-								config={funnelConfig}
-								dataKey="value"
-								height={400}
-								nameKey="name"
 								colors={[
 									'var(--chart-1)',
 									'var(--chart-2)',
 									'var(--chart-3)',
 									'var(--chart-4)',
 								]}
+								config={funnelConfig}
+								data={funnelData}
+								dataKey="value"
+								height={400}
+								nameKey="name"
 							/>
 						</CardContent>
 					</Card>
@@ -377,14 +377,14 @@ export function Home() {
 						</CardHeader>
 						<CardContent>
 							<LineChartComponent
-								data={data}
 								config={chartConfig}
+								data={data}
+								height={400}
+								lineKeys={['访问量', '转化量']}
 								lineType="linear"
 								xAxisKey="date"
 								xAxisLabel="月份"
-								height={400}
 								yAxisLabel="数量"
-								lineKeys={['访问量', '转化量']}
 							/>
 						</CardContent>
 					</Card>

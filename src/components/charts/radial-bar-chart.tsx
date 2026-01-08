@@ -1,10 +1,12 @@
 import { RadialBar, RadialBarChart, PolarAngleAxis, PolarGrid } from 'recharts';
+
+import type { ChartConfig } from '@/components/ui/chart';
+
 import {
 	ChartContainer,
 	ChartTooltipContent,
 	ChartTooltip,
 } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Empty, EmptyTitle, EmptyMedia } from '@/components/ui/empty';
 
 interface RadialBarChartProps {
@@ -25,22 +27,20 @@ export function RadialBarChartComponent({
 	return (
 		<ChartContainer
 			config={config}
-			width={width}
-			height={height}
 			data={data}
 			emptyComponent={
 				<div className="flex h-full items-center justify-center">
 					<Empty>
 						<EmptyMedia variant="icon">
 							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
 								fill="none"
+								height="24"
 								stroke="currentColor"
-								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="2"
+								viewBox="0 0 24 24"
+								width="24"
 							>
 								<circle cx="12" cy="12" r="10" />
 								<path d="M12 2a10 10 0 0 1 0 20" />
@@ -51,28 +51,30 @@ export function RadialBarChartComponent({
 					</Empty>
 				</div>
 			}
+			height={height}
+			width={width}
 		>
 			<RadialBarChart
+				barSize={10}
 				cx="50%"
 				cy="50%"
-				innerRadius="10%"
-				outerRadius="80%"
-				barSize={10}
 				data={data}
+				innerRadius="10%"
 				margin={{ top: 20, right: 30, bottom: 40, left: 20 }}
+				outerRadius="80%"
 			>
 				<PolarGrid gridType="polygon" />
 				<PolarAngleAxis
-					type="number"
-					domain={[0, 100]}
 					dataKey={dataKey}
+					domain={[0, 100]}
 					tick={false}
+					type="number"
 				/>
 				<RadialBar
-					label={{ position: 'insideStart', fill: '#fff' }}
 					background
 					dataKey={dataKey}
 					fill="var(--chart-1)"
+					label={{ position: 'insideStart', fill: '#fff' }}
 				/>
 				<ChartTooltip content={<ChartTooltipContent />} />
 			</RadialBarChart>

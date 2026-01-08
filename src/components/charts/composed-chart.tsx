@@ -1,10 +1,12 @@
 import { Bar, Line, ComposedChart, XAxis, YAxis } from 'recharts';
+
+import type { ChartConfig } from '@/components/ui/chart';
+
 import {
 	ChartContainer,
 	ChartTooltipContent,
 	ChartTooltip,
 } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Empty, EmptyTitle, EmptyMedia } from '@/components/ui/empty';
 
 interface ComposedChartProps {
@@ -34,21 +36,19 @@ export function ComposedChartComponent({
 		<ChartContainer
 			config={config}
 			data={data}
-			width={width}
-			height={height}
 			emptyComponent={
 				<div className="flex h-full items-center justify-center">
 					<Empty>
 						<EmptyMedia variant="icon">
 							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
 								fill="none"
+								height="24"
 								stroke="currentColor"
-								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="2"
+								viewBox="0 0 24 24"
+								width="24"
 							>
 								<path d="M3 3v18h18" />
 								<path d="M18 17V9" />
@@ -61,6 +61,8 @@ export function ComposedChartComponent({
 					</Empty>
 				</div>
 			}
+			height={height}
+			width={width}
 		>
 			<ComposedChart
 				data={data}
@@ -75,15 +77,15 @@ export function ComposedChartComponent({
 				/>
 				<ChartTooltip content={<ChartTooltipContent />} />
 				{barKeys.map((key) => (
-					<Bar key={key} dataKey={key} fill={`var(--color-${key})`} />
+					<Bar dataKey={key} fill={`var(--color-${key})`} key={key} />
 				))}
 				{lineKeys.map((key) => (
 					<Line
-						key={key}
-						type="monotone"
 						dataKey={key}
+						key={key}
 						stroke={`var(--color-${key})`}
 						strokeWidth={2}
+						type="monotone"
 					/>
 				))}
 			</ComposedChart>

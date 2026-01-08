@@ -1,10 +1,12 @@
 import { Scatter, ScatterChart, XAxis, YAxis, Cell } from 'recharts';
+
+import type { ChartConfig } from '@/components/ui/chart';
+
 import {
 	ChartContainer,
 	ChartTooltipContent,
 	ChartTooltip,
 } from '@/components/ui/chart';
-import type { ChartConfig } from '@/components/ui/chart';
 import { Empty, EmptyTitle, EmptyMedia } from '@/components/ui/empty';
 
 interface ScatterDataItem {
@@ -42,22 +44,20 @@ export function ScatterChartComponent({
 	return (
 		<ChartContainer
 			config={config}
-			width={width}
-			height={height}
 			data={data}
 			emptyComponent={
 				<div className="flex h-full items-center justify-center">
 					<Empty>
 						<EmptyMedia variant="icon">
 							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
 								fill="none"
+								height="24"
 								stroke="currentColor"
-								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="2"
+								viewBox="0 0 24 24"
+								width="24"
 							>
 								<circle cx="12" cy="12" r="1" />
 								<circle cx="19" cy="12" r="1" />
@@ -70,25 +70,27 @@ export function ScatterChartComponent({
 					</Empty>
 				</div>
 			}
+			height={height}
+			width={width}
 		>
 			<ScatterChart
 				data={data}
 				margin={{ top: 20, right: 30, bottom: 40, left: 20 }}
 			>
 				<XAxis
-					type="number"
 					dataKey={xAxisKey}
 					label={{ value: xAxisLabel, position: 'insideBottom', offset: -5 }}
+					type="number"
 				/>
 				<YAxis
-					type="number"
 					dataKey={yAxisKey}
 					label={{ value: yAxisLabel, angle: -90, position: 'insideLeft' }}
+					type="number"
 				/>
 				<ChartTooltip content={<ChartTooltipContent />} />
 				<Scatter dataKey={zAxisKey} fill={fillColor}>
 					{data.map((entry, index) => (
-						<Cell key={`cell-${index}`} fill={entry.color || fillColor} />
+						<Cell fill={entry.color || fillColor} key={`cell-${index}`} />
 					))}
 				</Scatter>
 			</ScatterChart>

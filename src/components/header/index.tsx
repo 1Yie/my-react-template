@@ -1,6 +1,7 @@
+import { Github, Menu, Search } from 'lucide-react';
+
 import { fetchHelloWorldTemplate } from '@/api/hello';
 import { Button } from '@/components/ui/button';
-import { Github, Menu, Search } from 'lucide-react';
 
 export function Header() {
 	function testApi() {
@@ -25,23 +26,23 @@ export function Header() {
 							text-slate-600 md:flex dark:text-slate-400"
 					>
 						<a
-							href="#"
 							className="transition-colors hover:text-slate-900
 								dark:hover:text-white"
+							href="#"
 						>
 							文档
 						</a>
 						<a
-							href="#"
 							className="transition-colors hover:text-slate-900
 								dark:hover:text-white"
+							href="#"
 						>
 							组件
 						</a>
 						<a
-							href="#"
 							className="transition-colors hover:text-slate-900
 								dark:hover:text-white"
+							href="#"
 						>
 							展示
 						</a>
@@ -50,24 +51,24 @@ export function Header() {
 
 				<div className="flex items-center gap-2">
 					<Button
-						variant="ghost"
-						size="icon"
 						className="hidden text-slate-500 sm:flex"
+						size="icon"
+						variant="ghost"
 					>
 						<Search className="size-5" />
 					</Button>
 
-					<Button variant="ghost" size="icon">
+					<Button size="icon" variant="ghost">
 						<a
 							href="https://github.com/1Yie/my-react-template"
-							target="_blank"
 							rel="noreferrer"
+							target="_blank"
 						>
 							<Github className="size-5" />
 						</a>
 					</Button>
 
-					<Button variant="ghost" size="icon" className="md:hidden">
+					<Button className="md:hidden" size="icon" variant="ghost">
 						<Menu className="size-5" />
 					</Button>
 
@@ -77,10 +78,10 @@ export function Header() {
 					/>
 
 					<Button
-						variant="default"
-						size="sm"
 						className="ml-2 hidden rounded-full px-4 sm:flex"
 						onClick={testApi}
+						size="sm"
+						variant="default"
 					>
 						立即开始
 					</Button>
