@@ -43,6 +43,7 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.7",
 		"prettier": "^3.7.4",
+		"prettier-plugin-classnames": "^0.8.6",
 		"prettier-plugin-pkg": "^0.21.2",
 		"prettier-plugin-sort-json": "^4.1.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",

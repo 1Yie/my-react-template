@@ -22,7 +22,27 @@ function SelectTrigger({
 	return (
 		<SelectPrimitive.Trigger
 			className={cn(
-				"border-input bg-background ring-ring/24 focus-visible:border-ring aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/16 dark:bg-input/32 dark:aria-invalid:ring-destructive/24 relative inline-flex min-h-9 w-full min-w-36 items-center justify-between gap-2 rounded-lg border bg-clip-padding px-[calc(--spacing(3)-1px)] text-left text-base shadow-xs transition-shadow outline-none select-none before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_1px_--theme(--color-black/4%)] focus-visible:ring-[3px] data-disabled:pointer-events-none data-disabled:opacity-64 sm:min-h-8 sm:text-sm dark:not-in-data-[slot=group]:bg-clip-border dark:not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_-1px_--theme(--color-white/8%)] pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [[data-disabled],:focus-visible,[aria-invalid],[data-pressed]]:shadow-none",
+				`border-input bg-background ring-ring/24 focus-visible:border-ring
+				aria-invalid:border-destructive/36
+				focus-visible:aria-invalid:border-destructive/64
+				focus-visible:aria-invalid:ring-destructive/16 dark:bg-input/32
+				dark:aria-invalid:ring-destructive/24 relative inline-flex min-h-9
+				w-full min-w-36 items-center justify-between gap-2 rounded-lg border
+				bg-clip-padding px-[calc(--spacing(3)-1px)] text-left text-base
+				shadow-xs transition-shadow outline-none select-none
+				before:pointer-events-none before:absolute before:inset-0
+				before:rounded-[calc(var(--radius-lg)-1px)]
+				not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_1px_--theme(--color-black/4%)]
+				focus-visible:ring-[3px] data-disabled:pointer-events-none
+				data-disabled:opacity-64 sm:min-h-8 sm:text-sm
+				dark:not-in-data-[slot=group]:bg-clip-border
+				dark:not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_-1px_--theme(--color-white/8%)]
+				pointer-coarse:after:absolute pointer-coarse:after:size-full
+				pointer-coarse:after:min-h-11 [&_svg]:pointer-events-none
+				[&_svg]:shrink-0 [&_svg:not([class*='opacity-'])]:opacity-80
+				[&_svg:not([class*='size-'])]:size-4.5
+				sm:[&_svg:not([class*='size-'])]:size-4
+				[[data-disabled],:focus-visible,[aria-invalid],[data-pressed]]:shadow-none`,
 				size === 'sm' &&
 					'min-h-8 gap-1.5 px-[calc(--spacing(2.5)-1px)] sm:min-h-7',
 				size === 'lg' && 'min-h-10 sm:min-h-9',
@@ -71,20 +91,33 @@ function SelectPopup({
 				sideOffset={sideOffset}
 			>
 				<SelectPrimitive.Popup
-					className="origin-(--transform-origin) transition-[scale,opacity] has-data-starting-style:scale-98 has-data-starting-style:opacity-0 has-data-[side=none]:scale-100 has-data-[side=none]:transition-none"
+					className="origin-(--transform-origin) transition-[scale,opacity]
+						has-data-starting-style:scale-98 has-data-starting-style:opacity-0
+						has-data-[side=none]:scale-100 has-data-[side=none]:transition-none"
 					data-slot="select-popup"
 					{...props}
 				>
 					<SelectPrimitive.ScrollUpArrow
-						className="before:from-popover top-0 z-50 flex h-6 w-full cursor-default items-center justify-center before:pointer-events-none before:absolute before:inset-x-px before:top-px before:h-[200%] before:rounded-t-[calc(var(--radius-lg)-1px)] before:bg-linear-to-b before:from-50%"
+						className="before:from-popover top-0 z-50 flex h-6 w-full
+							cursor-default items-center justify-center
+							before:pointer-events-none before:absolute before:inset-x-px
+							before:top-px before:h-[200%]
+							before:rounded-t-[calc(var(--radius-lg)-1px)]
+							before:bg-linear-to-b before:from-50%"
 						data-slot="select-scroll-up-arrow"
 					>
 						<ChevronUpIcon className="relative size-4.5 sm:size-4" />
 					</SelectPrimitive.ScrollUpArrow>
-					<span className="bg-popover relative block h-full rounded-lg border bg-clip-padding before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-lg dark:not-in-data-[slot=group]:bg-clip-border">
+					<span
+						className="bg-popover relative block h-full rounded-lg border
+							bg-clip-padding before:pointer-events-none before:absolute
+							before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)]
+							before:shadow-lg dark:not-in-data-[slot=group]:bg-clip-border"
+					>
 						<SelectPrimitive.List
 							className={cn(
-								'max-h-(--available-height) min-w-(--anchor-width) overflow-y-auto p-1',
+								`max-h-(--available-height) min-w-(--anchor-width)
+								overflow-y-auto p-1`,
 								className
 							)}
 							data-slot="select-list"
@@ -93,7 +126,12 @@ function SelectPopup({
 						</SelectPrimitive.List>
 					</span>
 					<SelectPrimitive.ScrollDownArrow
-						className="before:from-popover bottom-0 z-50 flex h-6 w-full cursor-default items-center justify-center before:pointer-events-none before:absolute before:inset-x-px before:bottom-px before:h-[200%] before:rounded-b-[calc(var(--radius-lg)-1px)] before:bg-linear-to-t before:from-50%"
+						className="before:from-popover bottom-0 z-50 flex h-6 w-full
+							cursor-default items-center justify-center
+							before:pointer-events-none before:absolute before:inset-x-px
+							before:bottom-px before:h-[200%]
+							before:rounded-b-[calc(var(--radius-lg)-1px)]
+							before:bg-linear-to-t before:from-50%"
 						data-slot="select-scroll-down-arrow"
 					>
 						<ChevronDownIcon className="relative size-4.5 sm:size-4" />
@@ -112,7 +150,14 @@ function SelectItem({
 	return (
 		<SelectPrimitive.Item
 			className={cn(
-				"data-highlighted:bg-accent data-highlighted:text-accent-foreground grid min-h-8 cursor-default grid-cols-[1rem_1fr] items-center gap-2 rounded-sm py-1 ps-2 pe-4 text-base outline-none in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] data-disabled:pointer-events-none data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4",
+				`data-highlighted:bg-accent data-highlighted:text-accent-foreground grid
+				min-h-8 cursor-default grid-cols-[1rem_1fr] items-center gap-2
+				rounded-sm py-1 ps-2 pe-4 text-base outline-none
+				in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)]
+				data-disabled:pointer-events-none data-disabled:opacity-64 sm:min-h-7
+				sm:text-sm [&_svg]:pointer-events-none [&_svg]:shrink-0
+				[&_svg:not([class*='size-'])]:size-4.5
+				sm:[&_svg:not([class*='size-'])]:size-4`,
 				className
 			)}
 			data-slot="select-item"

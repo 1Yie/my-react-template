@@ -4,13 +4,19 @@ export function Footer() {
 	const currentYear = new Date().getFullYear();
 
 	return (
-		<footer className="border-t border-slate-200 bg-slate-50/50 px-6 py-12 md:px-12 dark:border-slate-800 dark:bg-slate-900/50">
+		<footer
+			className="border-t border-slate-200 bg-slate-50/50 px-6 py-12 md:px-12
+				dark:border-slate-800 dark:bg-slate-900/50"
+		>
 			<div className="mx-auto max-w-6xl">
 				<div className="grid gap-8 md:grid-cols-3">
 					<div className="space-y-4">
 						<div className="flex items-center gap-2">
 							<Code className="size-6 text-slate-600 dark:text-slate-400" />
-							<span className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+							<span
+								className="text-lg font-semibold text-slate-900
+									dark:text-slate-100"
+							>
 								Ichiyo Template
 							</span>
 						</div>
@@ -20,7 +26,10 @@ export function Footer() {
 					</div>
 
 					<div className="space-y-4">
-						<h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+						<h3
+							className="text-sm font-semibold text-slate-900
+								dark:text-slate-100"
+						>
 							快速链接
 						</h3>
 						<div className="grid gap-2">
@@ -54,7 +63,9 @@ export function Footer() {
 									href={link.href}
 									target={link.external ? '_blank' : undefined}
 									rel={link.external ? 'noopener noreferrer' : undefined}
-									className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+									className="flex items-center gap-2 text-sm text-slate-500
+										transition-colors hover:text-slate-900 dark:text-slate-400
+										dark:hover:text-slate-100"
 								>
 									{link.icon}
 									{link.label}
@@ -67,10 +78,15 @@ export function Footer() {
 					</div>
 
 					<div className="space-y-4">
-						<h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+						<h3
+							className="text-sm font-semibold text-slate-900
+								dark:text-slate-100"
+						>
 							社区与支持
 						</h3>
-						<div className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+						<div
+							className="space-y-2 text-sm text-slate-500 dark:text-slate-400"
+						>
 							<p>如果这个项目对你有帮助，请给我们一个 ⭐ Star</p>
 							<p>
 								发现问题？欢迎提交{' '}
@@ -78,7 +94,8 @@ export function Footer() {
 									href="https://github.com/1Yie/my-react-template/issues"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-slate-700 underline hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100"
+									className="text-slate-700 underline hover:text-slate-900
+										dark:text-slate-300 dark:hover:text-slate-100"
 								>
 									Issue
 								</a>
@@ -87,14 +104,23 @@ export function Footer() {
 					</div>
 				</div>
 
-				<div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 sm:flex-row dark:border-slate-800">
-					<div className="flex items-center gap-1 text-sm text-slate-400 dark:text-slate-500">
+				<div
+					className="mt-8 flex flex-col items-center justify-between gap-4
+						border-t border-slate-200 pt-8 sm:flex-row dark:border-slate-800"
+				>
+					<div
+						className="flex items-center gap-1 text-sm text-slate-400
+							dark:text-slate-500"
+					>
 						<span>© {currentYear} Ichiyo Project.</span>
 						<span>Built with</span>
 						<Heart className="size-4 fill-red-500 text-red-500" />
 						<span>using React & Tailwind CSS</span>
 					</div>
-					<div className="flex items-center gap-4 text-xs text-slate-400 dark:text-slate-500">
+					<div
+						className="flex items-center gap-4 text-xs text-slate-400
+							dark:text-slate-500"
+					>
 						<span>MIT License</span>
 						<span>•</span>
 						<span>1.0.0</span>

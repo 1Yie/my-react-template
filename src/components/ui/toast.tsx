@@ -56,14 +56,16 @@ function Toasts({ position = 'bottom-right' }: { position: ToastPosition }) {
 		<Toast.Portal data-slot="toast-portal">
 			<Toast.Viewport
 				className={cn(
-					'fixed z-50 mx-auto flex w-[calc(100%-var(--toast-inset)*2)] max-w-90 [--toast-inset:--spacing(4)] sm:[--toast-inset:--spacing(8)]',
+					`fixed z-50 mx-auto flex w-[calc(100%-var(--toast-inset)*2)] max-w-90
+					[--toast-inset:--spacing(4)] sm:[--toast-inset:--spacing(8)]`,
 					// Vertical positioning
 					'data-[position*=top]:top-(--toast-inset)',
 					'data-[position*=bottom]:bottom-(--toast-inset)',
 					// Horizontal positioning
 					'data-[position*=left]:left-(--toast-inset)',
 					'data-[position*=right]:right-(--toast-inset)',
-					'data-[position*=center]:left-1/2 data-[position*=center]:-translate-x-1/2'
+					`data-[position*=center]:left-1/2
+					data-[position*=center]:-translate-x-1/2`
 				)}
 				data-position={position}
 				data-slot="toast-viewport"
@@ -76,19 +78,35 @@ function Toasts({ position = 'bottom-right' }: { position: ToastPosition }) {
 					return (
 						<Toast.Root
 							className={cn(
-								'bg-popover text-popover-foreground absolute z-[calc(9999-var(--toast-index))] h-(--toast-calc-height) w-full rounded-lg border bg-clip-padding shadow-lg select-none [transition:transform_.5s_cubic-bezier(.22,1,.36,1),opacity_.5s,height_.15s] before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] dark:bg-clip-border dark:before:shadow-[0_-1px_--theme(--color-white/8%)]',
+								`bg-popover text-popover-foreground absolute
+								z-[calc(9999-var(--toast-index))] h-(--toast-calc-height) w-full
+								rounded-lg border bg-clip-padding shadow-lg select-none
+								[transition:transform_.5s_cubic-bezier(.22,1,.36,1),opacity_.5s,height_.15s]
+								before:pointer-events-none before:absolute before:inset-0
+								before:rounded-[calc(var(--radius-lg)-1px)]
+								before:shadow-[0_1px_--theme(--color-black/4%)]
+								dark:bg-clip-border
+								dark:before:shadow-[0_-1px_--theme(--color-white/8%)]`,
 								// Base positioning using data-position
-								'data-[position*=right]:right-0 data-[position*=right]:left-auto',
+								`data-[position*=right]:right-0
+								data-[position*=right]:left-auto`,
 								'data-[position*=left]:right-auto data-[position*=left]:left-0',
 								'data-[position*=center]:right-0 data-[position*=center]:left-0',
-								'data-[position*=top]:top-0 data-[position*=top]:bottom-auto data-[position*=top]:origin-top',
-								'data-[position*=bottom]:top-auto data-[position*=bottom]:bottom-0 data-[position*=bottom]:origin-bottom',
+								`data-[position*=top]:top-0 data-[position*=top]:bottom-auto
+								data-[position*=top]:origin-top`,
+								`data-[position*=bottom]:top-auto
+								data-[position*=bottom]:bottom-0
+								data-[position*=bottom]:origin-bottom`,
 								// Gap fill for hover
-								'after:absolute after:left-0 after:h-[calc(var(--toast-gap)+1px)] after:w-full',
+								`after:absolute after:left-0
+								after:h-[calc(var(--toast-gap)+1px)] after:w-full`,
 								'data-[position*=top]:after:top-full',
 								'data-[position*=bottom]:after:bottom-full',
 								// Define some variables
-								'[--toast-calc-height:var(--toast-frontmost-height,var(--toast-height))] [--toast-gap:--spacing(3)] [--toast-peek:--spacing(3)] [--toast-scale:calc(max(0,1-(var(--toast-index)*.1)))] [--toast-shrink:calc(1-var(--toast-scale))]',
+								`[--toast-calc-height:var(--toast-frontmost-height,var(--toast-height))]
+								[--toast-gap:--spacing(3)] [--toast-peek:--spacing(3)]
+								[--toast-scale:calc(max(0,1-(var(--toast-index)*.1)))]
+								[--toast-shrink:calc(1-var(--toast-scale))]`,
 								// Define offset-y variable
 								'data-[position*=top]:[--toast-calc-offset-y:calc(var(--toast-offset-y)+var(--toast-index)*var(--toast-gap)+var(--toast-swipe-movement-y))]',
 								'data-[position*=bottom]:[--toast-calc-offset-y:calc(var(--toast-offset-y)*-1+var(--toast-index)*var(--toast-gap)*-1+var(--toast-swipe-movement-y))]',
@@ -127,14 +145,27 @@ function Toasts({ position = 'bottom-right' }: { position: ToastPosition }) {
 							}
 							toast={toast}
 						>
-							<Toast.Content className="pointer-events-auto flex items-center justify-between gap-1.5 overflow-hidden px-3.5 py-3 text-sm transition-opacity duration-250 data-behind:pointer-events-none data-behind:opacity-0 data-expanded:opacity-100">
+							<Toast.Content
+								className="pointer-events-auto flex items-center justify-between
+									gap-1.5 overflow-hidden px-3.5 py-3 text-sm transition-opacity
+									duration-250 data-behind:pointer-events-none
+									data-behind:opacity-0 data-expanded:opacity-100"
+							>
 								<div className="flex gap-2">
 									{Icon && (
 										<div
-											className="[&_svg]:pointer-events-none [&_svg]:shrink-0 [&>svg]:h-lh [&>svg]:w-4"
+											className="[&_svg]:pointer-events-none [&_svg]:shrink-0
+												[&>svg]:h-lh [&>svg]:w-4"
 											data-slot="toast-icon"
 										>
-											<Icon className="in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:animate-spin in-data-[type=loading]:opacity-80" />
+											<Icon
+												className="in-data-[type=error]:text-destructive
+													in-data-[type=info]:text-info
+													in-data-[type=success]:text-success
+													in-data-[type=warning]:text-warning
+													in-data-[type=loading]:animate-spin
+													in-data-[type=loading]:opacity-80"
+											/>
 										</div>
 									)}
 
@@ -206,10 +237,20 @@ function AnchoredToasts() {
 						>
 							<Toast.Root
 								className={cn(
-									'bg-popover text-popover-foreground relative border bg-clip-padding text-xs text-balance transition-[scale,opacity] before:pointer-events-none before:absolute before:inset-0 before:shadow-[0_1px_--theme(--color-black/4%)] data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0 dark:bg-clip-border dark:before:shadow-[0_-1px_--theme(--color-white/8%)]',
+									`bg-popover text-popover-foreground relative border
+									bg-clip-padding text-xs text-balance
+									transition-[scale,opacity] before:pointer-events-none
+									before:absolute before:inset-0
+									before:shadow-[0_1px_--theme(--color-black/4%)]
+									data-ending-style:scale-98 data-ending-style:opacity-0
+									data-starting-style:scale-98 data-starting-style:opacity-0
+									dark:bg-clip-border
+									dark:before:shadow-[0_-1px_--theme(--color-white/8%)]`,
 									tooltipStyle
-										? 'rounded-md shadow-md shadow-black/5 before:rounded-[calc(var(--radius-md)-1px)]'
-										: 'rounded-lg shadow-lg before:rounded-[calc(var(--radius-lg)-1px)]'
+										? `rounded-md shadow-md shadow-black/5
+											before:rounded-[calc(var(--radius-md)-1px)]`
+										: `rounded-lg shadow-lg
+											before:rounded-[calc(var(--radius-lg)-1px)]`
 								)}
 								data-slot="toast-popup"
 								toast={toast}
@@ -219,14 +260,26 @@ function AnchoredToasts() {
 										<Toast.Title data-slot="toast-title" />
 									</Toast.Content>
 								) : (
-									<Toast.Content className="pointer-events-auto flex items-center justify-between gap-1.5 overflow-hidden px-3.5 py-3 text-sm">
+									<Toast.Content
+										className="pointer-events-auto flex items-center
+											justify-between gap-1.5 overflow-hidden px-3.5 py-3
+											text-sm"
+									>
 										<div className="flex gap-2">
 											{Icon && (
 												<div
-													className="[&_svg]:pointer-events-none [&_svg]:shrink-0 [&>svg]:h-lh [&>svg]:w-4"
+													className="[&_svg]:pointer-events-none
+														[&_svg]:shrink-0 [&>svg]:h-lh [&>svg]:w-4"
 													data-slot="toast-icon"
 												>
-													<Icon className="in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:animate-spin in-data-[type=loading]:opacity-80" />
+													<Icon
+														className="in-data-[type=error]:text-destructive
+															in-data-[type=info]:text-info
+															in-data-[type=success]:text-success
+															in-data-[type=warning]:text-warning
+															in-data-[type=loading]:animate-spin
+															in-data-[type=loading]:opacity-80"
+													/>
 												</div>
 											)}
 
